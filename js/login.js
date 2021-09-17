@@ -16,12 +16,13 @@ if (window.localStorage) {
   let message = document.querySelector('.message')
 
   // Check for user and pass by using event click
-  submit.addEventListener('click', () => {
+  submit.addEventListener('click', (e) => {
     if (user == txtuser.value && pass == txtpass.value) {
       message.innerHTML = 'You have logged in successfully!'
     } else {
       message.innerHTML = 'Username or password is invalid!'
     }
+    e.preventDefault()
   })
 } else {
   console.log('No Supperted')
