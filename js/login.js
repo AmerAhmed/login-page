@@ -4,7 +4,9 @@ let txtuser = document.querySelector('.txtuser')
 let txtpass = document.querySelector('.txtpass')
 let submit = document.querySelector('.submit')
 
+// Check browser support
 if (window.localStorage) {
+  // console.log('Supperted!')
   // Store values by using key and pair
   localStorage.setItem('user', 'test')
   localStorage.setItem('pass', '1234')
@@ -22,6 +24,7 @@ if (window.localStorage) {
     } else {
       message.innerHTML = 'Username or password is invalid!'
     }
+    // Prevent default
     e.preventDefault()
   })
 } else {
