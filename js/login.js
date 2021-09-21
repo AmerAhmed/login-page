@@ -24,23 +24,23 @@ function store() {
   userSigin.style.display = 'none'
   let newlogin = document.createElement('fieldset')
   let legend = document.createElement('legend')
-  let logOutBtn = document.createElement('button')
+  let logout = document.createElement('button')
 
   if (localStorage.getItem('Username')) {
     legend.innerHTML = 'You are successfully logged in.'
-    logOutBtn.innerHTML = 'Logout'
+    logout.innerHTML = 'Logout'
   } else {
     legend.innerHTML = 'Username or password is invalid.'
-    logOutBtn.innerHTML = 'Go Back'
+    logout.innerHTML = 'Go Back'
   }
-  logOutBtn.addEventListener('click', () => {
+  logout.addEventListener('click', () => {
     localStorage.clear()
     userSigin.style.display = 'block'
     newlogin.remove()
   })
   document.body.appendChild(newlogin)
   newlogin.appendChild(legend)
-  newlogin.appendChild(logOutBtn)
+  newlogin.appendChild(logout)
 }
 
 if (localStorage.getItem('Username')) {
