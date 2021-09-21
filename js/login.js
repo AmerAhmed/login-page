@@ -1,32 +1,48 @@
 'use strict'
-// name, password  an subimt
-let txtuser = document.querySelector('.txtuser')
-let txtpass = document.querySelector('.txtpass')
-let submit = document.querySelector('.submit')
 
-// Check browser support
-if (window.localStorage) {
-  // console.log('Supperted!')
-  // Store values by using key and pair
-  localStorage.setItem('user', 'test')
-  localStorage.setItem('pass', '1234')
+// retrieved from the html file
+let userSigin = document.querySelector('#userSigin')
+let userName = document.querySelector('#userName')
+let userPass = document.querySelector('#userPass')
+let btn = document.querySelector('#btn')
 
-  // Get user and pass
-  let user = localStorage.getItem('user')
-  let pass = localStorage.getItem('pass')
-  // Show a message
-  let message = document.querySelector('.message')
+// The correct values for name and password
+let user = 'test'
+let pass = '1234'
 
-  // Check for user and pass by using event click
-  submit.addEventListener('click', (e) => {
-    if (user == txtuser.value && pass == txtpass.value) {
-      message.innerHTML = 'You have logged in successfully!'
-    } else {
-      message.innerHTML = 'Username or password is invalid!'
-    }
-    // Prevent default
-    e.preventDefault()
+// The user clicks on the button and function runs
+btn.addEventListener('click', check)
+
+function check() {
+  if (userName.value === user && userPass.value === pass) {
+    localStorage.setItem('Username', userName.value)
+  }
+  store()
+}
+
+function store() {
+  userSigin.style.display = 'none'
+  let newlogin = document.createElement('fieldset')
+  let legend = document.createElement('legend')
+  let logOutBtn = document.createElement('button')
+
+  if (localStorage.getItem('Username')) {
+    legend.innerHTML = 'You are successfully logged in.'
+    logOutBtn.innerHTML = 'Logout'
+  } else {
+    legend.innerHTML = 'Username or password is invalid.'
+    logOutBtn.innerHTML = 'Go Back'
+  }
+  logOutBtn.addEventListener('click', () => {
+    localStorage.clear()
+    userSigin.style.display = 'block'
+    newlogin.remove()
   })
-} else {
-  console.log('No Supperted')
+  document.body.appendChild(newlogin)
+  newlogin.appendChild(legend)
+  newlogin.appendChild(logOutBtn)
+}
+
+if (localStorage.getItem('Username')) {
+  store()
 }
